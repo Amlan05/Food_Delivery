@@ -10,7 +10,7 @@ const options = {
       description: 'Documentation for your RESTful API',
     },
   },
-  apis: [`${__dirname}/Routes/deliveryRoutes`],
+  apis: [`${__dirname}/Routes/deliveryRoutes.js`],
 };
 
 const specs = swaggerJsdoc(options);
