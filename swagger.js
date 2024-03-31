@@ -5,12 +5,12 @@ const options = {
   swaggerDefinition: {
     openapi: '3.0.0',
     info: {
-      title: 'Food Delivery',
+      title: 'Food Delivery API',
       version: '1.0.0',
-      description: 'Documentation for your RESTful API',
+      description: 'Documentation for the Food Delivery API',
     },
   },
-  apis: [`${__dirname}/Routes/deliveryRoutes.js`],
+  apis: ['./Routes/deliveryRoutes.js'],
 };
 
 const specs = swaggerJsdoc(options);
