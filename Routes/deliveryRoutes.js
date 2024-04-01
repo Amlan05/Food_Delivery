@@ -5,32 +5,42 @@ const deliveryController = require('../Controllers/deliveryController');
 /**
  * @swagger
  * /deliveryPrice:
- *   post:
+ *   get:
  *     summary: Calculate delivery price
  *     description: Calculate the delivery price based on provided parameters.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               zone:
- *                 type: string
- *               organization_id:
- *                 type: string
- *               total_distance:
- *                 type: number
- *               item_id:
- *                 type: string
+ *     parameters:
+ *       - in: query
+ *         name: zone
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The delivery zone.
+ *       - in: query
+ *         name: organization_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The organization ID.
+ *       - in: query
+ *         name: total_distance
+ *         required: true
+ *         schema:
+ *           type: number
+ *         description: The total distance of the delivery.
+ *       - in: query
+ *         name: item_id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The item ID.
  *     responses:
- *       '200':
+ *       200:
  *         $ref: '#/components/responses/Success'
- *       '404':
+ *       404:
  *         $ref: '#/components/responses/NotFound'
- *       '500':
+ *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-router.post('/deliveryPrice', deliveryController.calculateDeliveryPrice);
+router.get('/deliveryPrice', deliveryController.calculateDeliveryPrice);
 
 module.exports = router;
