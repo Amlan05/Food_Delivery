@@ -10,7 +10,7 @@ const options = {
       description: 'Documentation for the Food Delivery API',
     },
   },
-  apis: ['./Routes/*.js'],
+  apis: ['./Routes/deliveryRoutes.js'],
 };
 
 const specs = swaggerJsdoc(options);
