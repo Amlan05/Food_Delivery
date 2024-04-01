@@ -16,6 +16,34 @@ const calculateDeliveryPrice = async (req, res) => {
 
     const totalPrice = calculateTotalPrice(total_distance, priceData);
 
+    calculateDeliveryPrice.swagger = {
+      responses: {
+        200: {
+          description: 'Successful operation',
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  total_price: {
+                    type: 'number',
+                    description: 'The calculated total price for the delivery.',
+                    example: totalPrice
+                  }
+                }
+              }
+            }
+          }
+        },
+        404: {
+          description: 'Pricing data not found'
+        },
+        500: {
+          description: 'Internal server error'
+        }
+      }
+    };
+
     return res.status(200).json({ total_price: totalPrice });
   } catch (error) {
     return res.status(500).json({ error: `Error calculating delivery price: ${error.message}` });
