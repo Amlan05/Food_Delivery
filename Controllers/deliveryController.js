@@ -2,8 +2,8 @@ const database = require('../Services/databaseServices');
 
 const calculateDeliveryPrice = async (req, res) => {
   try {
-    
-    const {zone, organization_id, total_distance, item_id,} = req.body;
+
+    const { zone, organization_id, total_distance, item_id } = req.body;
 
     const query = 'SELECT * FROM pricing WHERE organization_id = $1 AND zone = $2 AND item_id = $3';
     const { rows } = await database.pool.query(query, [organization_id, zone, item_id]);
@@ -13,36 +13,7 @@ const calculateDeliveryPrice = async (req, res) => {
     }
 
     const priceData = rows[0];
-
     const totalPrice = calculateTotalPrice(total_distance, priceData);
-
-    calculateDeliveryPrice.swagger = {
-      responses: {
-        200: {
-          description: 'Successful operation',
-          content: {
-            'application/json': {
-              schema: {
-                type: 'object',
-                properties: {
-                  total_price: {
-                    type: 'number',
-                    description: 'The calculated total price for the delivery.',
-                    example: totalPrice
-                  }
-                }
-              }
-            }
-          }
-        },
-        404: {
-          description: 'Pricing data not found'
-        },
-        500: {
-          description: 'Internal server error'
-        }
-      }
-    };
 
     return res.status(200).json({ total_price: totalPrice });
   } catch (error) {
@@ -51,7 +22,6 @@ const calculateDeliveryPrice = async (req, res) => {
 };
 
 const calculateTotalPrice = (total_distance, priceData) => {
-  // Convert base price and per km rate to cents
   const basePriceCents = priceData.fix_price * 100;
   const perKmRateCents = priceData.km_price * 100;
 

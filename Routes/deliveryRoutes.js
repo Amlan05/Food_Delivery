@@ -5,42 +5,44 @@ const deliveryController = require('../Controllers/deliveryController');
 /**
  * @swagger
  * /deliveryPrice:
- *   get:
+ *   post:
  *     summary: Calculate delivery price
  *     description: Calculate the delivery price based on provided parameters.
- *     parameters:
- *       - in: query
- *         name: zone
- *         required: true
- *         schema:
- *           type: string
- *         description: The delivery zone.
- *       - in: query
- *         name: organization_id
- *         required: true
- *         schema:
- *           type: string
- *         description: The organization ID.
- *       - in: query
- *         name: total_distance
- *         required: true
- *         schema:
- *           type: number
- *         description: The total distance of the delivery.
- *       - in: query
- *         name: item_id
- *         required: true
- *         schema:
- *           type: string
- *         description: The item ID.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               zone:
+ *                 type: string
+ *                 description: The delivery zone.
+ *               organization_id:
+ *                 type: integer
+ *                 description: The organization ID.
+ *               total_distance:
+ *                 type: number
+ *                 description: The total distance of the delivery.
+ *               item_id:
+ *                 type: string
+ *                 description: The item ID.
  *     responses:
  *       200:
- *         $ref: '#/components/responses/Success'
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 total_price:
+ *                   type: number
+ *                   description: The calculated total price for the delivery.
  *       404:
- *         $ref: '#/components/responses/NotFound'
+ *         description: Pricing data not found
  *       500:
- *         $ref: '#/components/responses/ServerError'
+ *         description: Internal server error
  */
-router.get('/deliveryPrice', deliveryController.calculateDeliveryPrice);
+router.post('/deliveryPrice', deliveryController.calculateDeliveryPrice);
 
 module.exports = router;
