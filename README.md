@@ -7,7 +7,7 @@ This is a RESTful API for a food delivery service. It allows users to calculate 
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/food-delivery-api.git
+git clone https://github.com/Amlan05/Food_Delivery.git
 ```
 
 2. Install dependencies:
